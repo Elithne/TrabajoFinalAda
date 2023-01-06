@@ -5,17 +5,24 @@ const URL_API = "https://rickandmortyapi.com/api/character";
 console.log(URL_API);
 
 fetch(URL_API)
-  .then((response) => response.json())
-  .then((data) => {
+.then((response) => response.json()) 
+.then((data) => {
     const characters = data.results;
+    const background = document.querySelector('.characters');
 
-    //Cada cuadro de personaje personaje va a estar dentro de un div
-    for (let character of characters) {
-      console.log(character);
-      $container.innerHTML += `
-        <div class="option-name"> <img class="character-img" src="${character.image}" alt="imagen de ${character.name}">
-        <h3>${character.name} - ${character.status}</h3>
-        </div>
-      `;
+    for (let character of characters){
+        console.log (character);
+        $container.innerHTML += `
+        <div class="characters">
+        <h3>${character.name}</h3>
+        <img class="character-img" src="${character.image}" alt="${character.name}">
+        <h4>Basic Info:</h4>
+        <p>${character.gender} - ${character.species}</p>
+        <h4>Location:</h4>
+        <p>${character.location.name}</p>
+        <h4>Status:</h4>
+        <p>${character.status}</p>
+        </div>`;       
     }
-  });
+  }
+);
